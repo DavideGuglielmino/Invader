@@ -11,6 +11,25 @@ class INVADER_API ADiceTable : public AInteractable
 {
 	GENERATED_BODY()
 
+	UPROPERTY(Transient)
+	UMaterialInstanceDynamic* _materialPtr;
+
+	UPROPERTY(EditDefaultsOnly)
+	float _distanceInteraction_close;
+	UPROPERTY(EditDefaultsOnly)
+	float _distanceInteraction_near;
+	UPROPERTY(EditDefaultsOnly)
+	float _distanceInteraction_far;
+
+	UPROPERTY(EditDefaultsOnly)
+	FLinearColor _distanceColor_close;
+	UPROPERTY(EditDefaultsOnly)
+	FLinearColor _distanceColor_near;
+	UPROPERTY(EditDefaultsOnly)
+	FLinearColor _distanceColor_far;
+	UPROPERTY(EditDefaultsOnly)
+	FLinearColor _distanceColor_away;
+
 public:
 	// Sets default values for this actor's properties
 	ADiceTable();

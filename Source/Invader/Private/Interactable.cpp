@@ -16,8 +16,7 @@ void AInteractable::BeginPlay()
 {
 	Super::BeginPlay();
 
-	FVector MyCharacterPosition = UGameplayStatics::GetPlayerPawn(GetWorld(), 0)->GetActorLocation();
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, FString::Printf(TEXT("Player Location: %s"), *MyCharacterPosition.ToString()));
+	_playerPtr = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
 }
 
 // Called every frame

@@ -4,18 +4,17 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "InvaderCharacter.h"
 #include "Interactable.generated.h"
 
 UCLASS()
 class INVADER_API AInteractable : public AActor
 {
 	GENERATED_BODY()
-	
+
 protected:
 	UPROPERTY(Transient)
-	ACharacter* _character2;
-
+	APawn* _playerPtr;
+	
 public:	
 	// Sets default values for this actor's properties
 	AInteractable();
