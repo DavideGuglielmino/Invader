@@ -16,27 +16,9 @@ void ADiceTable::BeginPlay()
 {
 	Super::BeginPlay();
 
-	//UStaticMeshComponent*
-	//TArray<UStaticMeshComponent*> Components;
-	//GetComponents<UStaticMeshComponent>(Components);
-
-	//_materialPtr = this->FindComponentByClass<UStaticMeshComponent>()->GetMaterial(0);
-
-	//_materialPtr = UMaterialInstanceDynamic::Create(sphere->GetMaterial(0), NULL);
-
-	/* Create a dynamic material instance from our mesh's material 0 */
-	//_materialPtr = UMaterialInstanceDynamic::Create(this->FindComponentByClass<UStaticMeshComponent>()->GetMaterial(0), this);
-	TArray<UStaticMeshComponent*> Comps;
-
-	GetComponents(Comps);
-	if (Comps.Num() > 0)
-	{
-		UStaticMeshComponent* FoundComp = Comps[0];
-		//do stuff with FoundComp
-		_materialPtr = UMaterialInstanceDynamic::Create(FoundComp->GetMaterial(0), this);
-	}
-	
-	rand();
+	UStaticMeshComponent* mesh = this->FindComponentByClass<UStaticMeshComponent>();
+	_materialPtr = UMaterialInstanceDynamic::Create(mesh->GetMaterial(0), this);
+	mesh->SetMaterial(0, _materialPtr);
 }
 
 // Called every frame
@@ -49,11 +31,9 @@ void ADiceTable::Tick(float DeltaTime)
 
 	float distance = _playerPtr->GetActorLocation().X - this->GetActorLocation().X;
 
-	if (distance < _distanceInteraction_close)
+	if (distance < _distanceInteraction_touching)
 	{
-		_materialPtr->SetVectorParameterValue("_InteractColor", _distanceColor_close);
-		/* Set the mesh's material to the new one */
-		//GetMesh()->SetMaterial(0, DynamicMaterial);
+		_materialPtr->SetVectorParameterValue("_DistanceColor", _distanceColor_touching);
 		GEngine->AddOnScreenDebugMessage(-1, 0.2f, FColor::Blue, FString::Printf(TEXT("close")));
 	}
 	else if (distance < _distanceInteraction_near)
@@ -61,14 +41,9 @@ void ADiceTable::Tick(float DeltaTime)
 		_materialPtr->SetVectorParameterValue("_DistanceColor", _distanceColor_near);
 		GEngine->AddOnScreenDebugMessage(-1, 0.2f, FColor::Blue, FString::Printf(TEXT("near")));
 	}
-	else if (distance < _distanceInteraction_far)
-	{
-		_materialPtr->SetVectorParameterValue("_DistanceColor", _distanceColor_far);
-		GEngine->AddOnScreenDebugMessage(-1, 0.2f, FColor::Blue, FString::Printf(TEXT("far")));
-	}
 	else
 	{
-		_materialPtr->SetVectorParameterValue("_DistanceColor", _distanceColor_away);
+		_materialPtr->SetVectorParameterValue("_DistanceColor", _distanceColor_far);
 		GEngine->AddOnScreenDebugMessage(-1, 0.2f, FColor::Blue, FString::Printf(TEXT("away")));
 	}
 }
