@@ -33,17 +33,29 @@ void ADiceTable::Tick(float DeltaTime)
 
 	if (distance < _distanceInteraction_touching)
 	{
-		_materialPtr->SetVectorParameterValue("_DistanceColor", _distanceColor_touching);
-		GEngine->AddOnScreenDebugMessage(-1, 0.2f, FColor::Blue, FString::Printf(TEXT("close")));
+		if (_distanceType != touching)
+		{
+			_distanceType = touching;
+			_materialPtr->SetVectorParameterValue("_DistanceColor", _distanceColor_touching);
+			GEngine->AddOnScreenDebugMessage(-1, 0.2f, FColor::Blue, FString::Printf(TEXT("close")));
+		}
 	}
 	else if (distance < _distanceInteraction_near)
 	{
-		_materialPtr->SetVectorParameterValue("_DistanceColor", _distanceColor_near);
-		GEngine->AddOnScreenDebugMessage(-1, 0.2f, FColor::Blue, FString::Printf(TEXT("near")));
+		if (_distanceType != near)
+		{
+			_distanceType = near;
+			_materialPtr->SetVectorParameterValue("_DistanceColor", _distanceColor_near);
+			GEngine->AddOnScreenDebugMessage(-1, 0.2f, FColor::Blue, FString::Printf(TEXT("near")));
+		}
 	}
 	else
 	{
-		_materialPtr->SetVectorParameterValue("_DistanceColor", _distanceColor_far);
-		GEngine->AddOnScreenDebugMessage(-1, 0.2f, FColor::Blue, FString::Printf(TEXT("away")));
+		if (_distanceType != far)
+		{
+			_distanceType = far;
+			_materialPtr->SetVectorParameterValue("_DistanceColor", _distanceColor_far);
+			GEngine->AddOnScreenDebugMessage(-1, 0.2f, FColor::Blue, FString::Printf(TEXT("away")));
+		}
 	}
 }

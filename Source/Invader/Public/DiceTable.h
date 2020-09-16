@@ -11,6 +11,7 @@ class INVADER_API ADiceTable : public AInteractable
 {
 	GENERATED_BODY()
 
+private:
 	UPROPERTY(Transient)
 	UMaterialInstanceDynamic* _materialPtr;
 
@@ -37,5 +38,10 @@ protected:
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+private:
+	// Used to not repeat unnecessary operation every Tick update
+	enum distanceType {touching, near, far};
+	distanceType _distanceType;
 
 };
