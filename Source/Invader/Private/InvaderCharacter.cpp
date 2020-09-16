@@ -8,6 +8,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "Interactable.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AInvaderCharacter
@@ -78,7 +79,6 @@ void AInvaderCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerI
 	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &AInvaderCharacter::OnResetVR);
 }
 
-
 void AInvaderCharacter::OnResetVR()
 {
 	UHeadMountedDisplayFunctionLibrary::ResetOrientationAndPosition();
@@ -138,4 +138,14 @@ void AInvaderCharacter::MoveRight(float Value)
 void AInvaderCharacter::Interact()
 {
 
+}
+
+void AInvaderCharacter::SetInteractable(AInteractable* interactable)
+{
+	_currentInteractable = interactable;
+}
+
+AInteractable* AInvaderCharacter::GetInteractable() const
+{
+	return _currentInteractable;
 }

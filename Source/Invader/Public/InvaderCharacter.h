@@ -6,10 +6,16 @@
 #include "GameFramework/Character.h"
 #include "InvaderCharacter.generated.h"
 
+class AInteractable;
+
 UCLASS(config=Game)
 class AInvaderCharacter : public ACharacter
 {
 	GENERATED_BODY()
+
+private:
+	UPROPERTY(Transient)
+	AInteractable* _currentInteractable;
 
 	/** Camera boom positioning the camera behind the character */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
@@ -71,5 +77,7 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+public:
+	void SetInteractable(AInteractable* interactable);
+	AInteractable* GetInteractable() const;
 };
-

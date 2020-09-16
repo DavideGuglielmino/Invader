@@ -1,8 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 //#include "Kismet/KismetMathLibrary.h"
-#include "Containers/Array.h"
 #include "DiceTable.h"
+#include "Containers/Array.h"
+#include "InvaderCharacter.h"
 
 // Sets default values
 ADiceTable::ADiceTable()
@@ -35,18 +36,23 @@ void ADiceTable::Tick(float DeltaTime)
 	{
 		if (_distanceType != touching)
 		{
+			_playerPtr->SetInteractable(this);
 			_distanceType = touching;
 			_materialPtr->SetVectorParameterValue("_DistanceColor", _distanceColor_touching);
-			GEngine->AddOnScreenDebugMessage(-1, 0.2f, FColor::Blue, FString::Printf(TEXT("close")));
+			UE_LOG(LogTemp, Warning, TEXT("touching"));
 		}
 	}
 	else if (distance < _distanceInteraction_near)
 	{
 		if (_distanceType != near)
 		{
+			if (_distanceType == touching && _playerPtr->GetInteractable() == this)
+			{
+				_playerPtr->SetInteractable(nullptr);
+			}
 			_distanceType = near;
 			_materialPtr->SetVectorParameterValue("_DistanceColor", _distanceColor_near);
-			GEngine->AddOnScreenDebugMessage(-1, 0.2f, FColor::Blue, FString::Printf(TEXT("near")));
+			UE_LOG(LogTemp, Warning, TEXT("near"));
 		}
 	}
 	else
@@ -55,7 +61,7 @@ void ADiceTable::Tick(float DeltaTime)
 		{
 			_distanceType = far;
 			_materialPtr->SetVectorParameterValue("_DistanceColor", _distanceColor_far);
-			GEngine->AddOnScreenDebugMessage(-1, 0.2f, FColor::Blue, FString::Printf(TEXT("away")));
+			UE_LOG(LogTemp, Warning, TEXT("far"));
 		}
 	}
 }

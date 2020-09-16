@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "InvaderCharacter.h"
 #include "Interactable.generated.h"
 
 UCLASS()
@@ -13,7 +14,7 @@ class INVADER_API AInteractable : public AActor
 
 protected:
 	UPROPERTY(Transient)
-	APawn* _playerPtr;
+	AInvaderCharacter* _playerPtr;
 	
 public:	
 	// Sets default values for this actor's properties
@@ -26,5 +27,4 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
 };

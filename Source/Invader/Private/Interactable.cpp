@@ -16,7 +16,7 @@ void AInteractable::BeginPlay()
 {
 	Super::BeginPlay();
 
-	_playerPtr = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
+	_playerPtr = static_cast<AInvaderCharacter*>(UGameplayStatics::GetPlayerPawn(GetWorld(), 0));
 }
 
 // Called every frame
