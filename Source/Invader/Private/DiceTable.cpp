@@ -1,6 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-//#include "Kismet/KismetMathLibrary.h"
+#include "GenericPlatform/GenericPlatformMath.h"
 #include "DiceTable.h"
 #include "Containers/Array.h"
 #include "InvaderCharacter.h"
@@ -27,10 +27,7 @@ void ADiceTable::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	float tablePosition = this->GetActorLocation().X;
-	float playerPosition = _playerPtr->GetActorLocation().X;
-
-	float distance = _playerPtr->GetActorLocation().X - this->GetActorLocation().X;
+	float distance = FGenericPlatformMath::Sqrt(FGenericPlatformMath::Pow(_playerPtr->GetActorLocation().X - this->GetActorLocation().X, 2) + FGenericPlatformMath::Pow(_playerPtr->GetActorLocation().Y - this->GetActorLocation().Y, 2));
 
 	if (distance < _distanceInteraction_touching)
 	{
