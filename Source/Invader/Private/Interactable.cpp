@@ -23,5 +23,4 @@ void AInteractable::BeginPlay()
 void AInteractable::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }

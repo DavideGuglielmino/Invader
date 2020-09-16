@@ -13,7 +13,7 @@ class INVADER_API AInteractable : public AActor
 	GENERATED_BODY()
 
 protected:
-	UPROPERTY(Transient)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Transient)
 	AInvaderCharacter* _playerPtr;
 	
 public:	
@@ -27,4 +27,8 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	//UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Interactable")
+	UFUNCTION(BlueprintImplementableEvent, Category = "Interactable")
+	void InteractBehaviour();
 };

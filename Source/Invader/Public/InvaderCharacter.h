@@ -8,15 +8,22 @@
 
 class AInteractable;
 
+UENUM(BlueprintType)
+enum class CustomBlueprintBranches : uint8
+{
+	OnSuccess,
+	OnFail
+};
+
 UCLASS(config=Game)
 class AInvaderCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
-private:
-	UPROPERTY(Transient)
+public:
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Transient)
 	AInteractable* _currentInteractable;
-
+private:
 	/** Camera boom positioning the camera behind the character */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class USpringArmComponent* CameraBoom;
@@ -80,4 +87,7 @@ public:
 public:
 	void SetInteractable(AInteractable* interactable);
 	AInteractable* GetInteractable() const;
+
+	UFUNCTION(BlueprintCallable, Meta = (ExpandEnumAsExecs = "Branches"))
+	AInteractable* IsNearInteractable(CustomBlueprintBranches& Branches);
 };

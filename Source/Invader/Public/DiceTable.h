@@ -41,7 +41,12 @@ public:
 
 private:
 	// Used to not repeat unnecessary operation every Tick update
-	enum distanceType {touching, near, far};
-	distanceType _distanceType;
+	enum distanceType
+	{
+		touching,
+		near,
+		far
+	};
 
+	distanceType _distanceType;
 };
