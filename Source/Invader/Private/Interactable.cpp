@@ -24,8 +24,3 @@ void AInteractable::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 }
-
-void  AInteractable::InteractBehaviour_Implementation()
-{
-
-}
