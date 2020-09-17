@@ -81,7 +81,7 @@ void AInvaderCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerI
 
 void AInvaderCharacter::OnResetVR()
 {
-	UHeadMountedDisplayFunctionLibrary::ResetOrientationAndPosition();
+	//UHeadMountedDisplayFunctionLibrary::ResetOrientationAndPosition();
 }
 
 void AInvaderCharacter::TouchStarted(ETouchIndex::Type FingerIndex, FVector Location)
