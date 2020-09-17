@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "GenericPlatform/GenericPlatformMath.h"
 #include "DiceTable.h"
+#include "GenericPlatform/GenericPlatformMath.h"
 #include "Containers/Array.h"
 #include "InvaderCharacter.h"
 
