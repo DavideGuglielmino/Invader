@@ -11,6 +11,9 @@ class INVADER_API ADiceTable : public AInteractable
 {
 	GENERATED_BODY()
 
+public:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	UStaticMeshComponent* _modelMeshPtr;
 private:
 	UPROPERTY(Transient)
 	UMaterialInstanceDynamic* _materialPtr;

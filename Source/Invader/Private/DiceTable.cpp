@@ -17,9 +17,8 @@ void ADiceTable::BeginPlay()
 {
 	Super::BeginPlay();
 
-	UStaticMeshComponent* mesh = this->FindComponentByClass<UStaticMeshComponent>();
-	_materialPtr = UMaterialInstanceDynamic::Create(mesh->GetMaterial(0), this);
-	mesh->SetMaterial(0, _materialPtr);
+	_materialPtr = UMaterialInstanceDynamic::Create(_modelMeshPtr->GetMaterial(0), this);
+	_modelMeshPtr->SetMaterial(0, _materialPtr);
 }
 
 // Called every frame
