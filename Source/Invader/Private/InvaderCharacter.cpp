@@ -149,17 +149,3 @@ AInteractable* AInvaderCharacter::GetInteractable() const
 {
 	return _currentInteractable;
 }
-
-AInteractable* AInvaderCharacter::IsNearInteractable(CustomBlueprintBranches& Branches)
-{
-	if (_currentInteractable)
-	{
-		Branches = CustomBlueprintBranches::OnSuccess;
-	}
-	else
-	{
-		Branches = CustomBlueprintBranches::OnFail;
-	}
-
-	return _currentInteractable;
-}

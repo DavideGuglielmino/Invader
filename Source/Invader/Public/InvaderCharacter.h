@@ -8,13 +8,6 @@
 
 class AInteractable;
 
-UENUM(BlueprintType)
-enum class CustomBlueprintBranches : uint8
-{
-	OnSuccess,
-	OnFail
-};
-
 UCLASS(config=Game)
 class AInvaderCharacter : public ACharacter
 {
@@ -87,7 +80,4 @@ public:
 public:
 	void SetInteractable(AInteractable* interactable);
 	AInteractable* GetInteractable() const;
-
-	UFUNCTION(BlueprintCallable, Meta = (ExpandEnumAsExecs = "Branches"))
-	AInteractable* IsNearInteractable(CustomBlueprintBranches& Branches);
 };
