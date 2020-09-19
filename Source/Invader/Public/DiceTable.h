@@ -14,20 +14,21 @@ class INVADER_API ADiceTable : public AInteractable
 public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	UStaticMeshComponent* _modelMeshPtr;
-private:
-	UPROPERTY(Transient)
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Transient)
 	UMaterialInstanceDynamic* _materialPtr;
 
+private:
 	UPROPERTY(EditDefaultsOnly)
 	float _distanceInteraction_touching;
 	UPROPERTY(EditDefaultsOnly)
 	float _distanceInteraction_near;
 
-	UPROPERTY(EditDefaultsOnly)
+public:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	FLinearColor _distanceColor_touching;
 	UPROPERTY(EditDefaultsOnly)
 	FLinearColor _distanceColor_near;
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	FLinearColor _distanceColor_far;
 
 public:
