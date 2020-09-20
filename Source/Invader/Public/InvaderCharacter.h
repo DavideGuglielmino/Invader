@@ -37,17 +37,11 @@ public:
 
 protected:
 
-	/** Resets HMD orientation in VR. */
-	void OnResetVR();
-
 	/** Called for forwards/backward input */
 	void MoveForward(float Value);
 
 	/** Called for side to side input */
 	void MoveRight(float Value);
-
-	/** Called via input to interact to interactable objects. */
-	void Interact();
 
 	/** 
 	 * Called via input to turn at a given rate. 
@@ -61,12 +55,6 @@ protected:
 	 */
 	void LookUpAtRate(float Rate);
 
-	/** Handler for when a touch input begins. */
-	void TouchStarted(ETouchIndex::Type FingerIndex, FVector Location);
-
-	/** Handler for when a touch input stops. */
-	void TouchStopped(ETouchIndex::Type FingerIndex, FVector Location);
-
 protected:
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
@@ -77,7 +65,10 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+
 public:
+	/** Called by interactable objects to set themself as the object the player can interact with */
 	void SetInteractable(AInteractable* interactable);
+	/** Called by interactable objects to see if they are the interactable object this player is assigned to */
 	AInteractable* GetInteractable() const;
 };

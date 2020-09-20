@@ -30,8 +30,6 @@ AInvaderCharacter::AInvaderCharacter()
 	// Configure character movement
 	GetCharacterMovement()->bOrientRotationToMovement = true; // Character moves in the direction of input...	
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 540.0f, 0.0f); // ...at this rotation rate
-	GetCharacterMovement()->JumpZVelocity = 600.f;
-	GetCharacterMovement()->AirControl = 0.2f;
 
 	// Create a camera boom (pulls in towards the player if there is a collision)
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
@@ -55,13 +53,8 @@ void AInvaderCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerI
 {
 	// Set up gameplay key bindings
 	check(PlayerInputComponent);
-	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
-	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
-
 	PlayerInputComponent->BindAxis("MoveForward", this, &AInvaderCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &AInvaderCharacter::MoveRight);
-
-	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &AInvaderCharacter::Interact);
 
 	// We have 2 versions of the rotation bindings to handle different kinds of devices differently
 	// "turn" handles devices that provide an absolute delta, such as a mouse.
@@ -70,44 +63,23 @@ void AInvaderCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerI
 	PlayerInputComponent->BindAxis("TurnRate", this, &AInvaderCharacter::TurnAtRate);
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 	PlayerInputComponent->BindAxis("LookUpRate", this, &AInvaderCharacter::LookUpAtRate);
-
-	// handle touch devices
-	PlayerInputComponent->BindTouch(IE_Pressed, this, &AInvaderCharacter::TouchStarted);
-	PlayerInputComponent->BindTouch(IE_Released, this, &AInvaderCharacter::TouchStopped);
-
-	// VR headset functionality
-	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &AInvaderCharacter::OnResetVR);
-}
-
-void AInvaderCharacter::OnResetVR()
-{
-	//UHeadMountedDisplayFunctionLibrary::ResetOrientationAndPosition();
-}
-
-void AInvaderCharacter::TouchStarted(ETouchIndex::Type FingerIndex, FVector Location)
-{
-		Jump();
-}
-
-void AInvaderCharacter::TouchStopped(ETouchIndex::Type FingerIndex, FVector Location)
-{
-		StopJumping();
 }
 
 void AInvaderCharacter::TurnAtRate(float Rate)
 {
 	// calculate delta for this frame from the rate information
-	AddControllerYawInput(Rate * BaseTurnRate * GetWorld()->GetDeltaSeconds());
+	//AddControllerYawInput(Rate * BaseTurnRate * GetWorld()->GetDeltaSeconds());
 }
 
 void AInvaderCharacter::LookUpAtRate(float Rate)
 {
 	// calculate delta for this frame from the rate information
-	AddControllerPitchInput(Rate * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
+	//AddControllerPitchInput(Rate * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
 }
 
 void AInvaderCharacter::MoveForward(float Value)
 {
+	/*
 	if ((Controller != NULL) && (Value != 0.0f))
 	{
 		// find out which way is forward
@@ -118,10 +90,12 @@ void AInvaderCharacter::MoveForward(float Value)
 		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
 		AddMovementInput(Direction, Value);
 	}
+	*/
 }
 
 void AInvaderCharacter::MoveRight(float Value)
 {
+	/*
 	if ( (Controller != NULL) && (Value != 0.0f) )
 	{
 		// find out which way is right
@@ -133,11 +107,7 @@ void AInvaderCharacter::MoveRight(float Value)
 		// add movement in that direction
 		AddMovementInput(Direction, Value);
 	}
-}
-
-void AInvaderCharacter::Interact()
-{
-
+	*/
 }
 
 void AInvaderCharacter::SetInteractable(AInteractable* interactable)
