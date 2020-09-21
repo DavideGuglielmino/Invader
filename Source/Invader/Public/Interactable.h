@@ -30,4 +30,7 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Interactable")
 	void InteractBehaviour();
+
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Interactable")
+	void OnTouchingBehaviour(bool activate);
 };

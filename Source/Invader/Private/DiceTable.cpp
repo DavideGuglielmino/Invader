@@ -33,9 +33,9 @@ void ADiceTable::Tick(float DeltaTime)
 		if (_distanceType != touching)
 		{
 			_playerPtr->SetInteractable(this);
+			OnTouchingBehaviour(true);
 			_distanceType = touching;
 			_materialPtr->SetVectorParameterValue("_DistanceColor", _distanceColor_touching);
-			UE_LOG(LogTemp, Warning, TEXT("touching"));
 		}
 	}
 	else if (distance < _distanceInteraction_near)
@@ -45,10 +45,10 @@ void ADiceTable::Tick(float DeltaTime)
 			if (_distanceType == touching && _playerPtr->GetInteractable() == this)
 			{
 				_playerPtr->SetInteractable(nullptr);
+				OnTouchingBehaviour(false);
 			}
 			_distanceType = near;
 			_materialPtr->SetVectorParameterValue("_DistanceColor", _distanceColor_near);
-			UE_LOG(LogTemp, Warning, TEXT("near"));
 		}
 	}
 	else
@@ -57,7 +57,6 @@ void ADiceTable::Tick(float DeltaTime)
 		{
 			_distanceType = far;
 			_materialPtr->SetVectorParameterValue("_DistanceColor", _distanceColor_far);
-			UE_LOG(LogTemp, Warning, TEXT("far"));
 		}
 	}
 }
