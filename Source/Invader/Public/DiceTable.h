@@ -6,6 +6,9 @@
 #include "Interactable.h"
 #include "DiceTable.generated.h"
 
+/// This class can be assigned to every Dice Table object in the level
+/// It makes the table change color in relation to the proximity of the player to this object
+/// Since there are no other information given to the gameplay, this class can be further improved (some parts can be changed to override functions of AInteractable)
 UCLASS()
 class INVADER_API ADiceTable : public AInteractable
 {
@@ -13,23 +16,25 @@ class INVADER_API ADiceTable : public AInteractable
 
 public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
-	UStaticMeshComponent* _modelMeshPtr;
+	UStaticMeshComponent* _modelMeshPtr; /** The table model which has the material */
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Transient)
-	UMaterialInstanceDynamic* _materialPtr;
+	UMaterialInstanceDynamic* _materialPtr; /** The new material (generated at runtime during BeginPlay) to use to control the shader variables*/
 
 private:
+	/** The distances (in meters) assigned through Blueprint Editor that decide if a player is enough closer to this object */
 	UPROPERTY(EditDefaultsOnly)
 	float _distanceInteraction_touching;
 	UPROPERTY(EditDefaultsOnly)
 	float _distanceInteraction_near;
 
 public:
+	/** The colors assigned through Blueprint Editor that will change visually the apparence of the Dice Table */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	FLinearColor _distanceColor_touching;
+	FLinearColor _distanceColor_touching; // The color for when the player can interact with this object
 	UPROPERTY(EditDefaultsOnly)
-	FLinearColor _distanceColor_near;
+	FLinearColor _distanceColor_near; // The color for when the player is close enough to give them the information that this object is interactable, but not too close to interact with
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	FLinearColor _distanceColor_far;
+	FLinearColor _distanceColor_far; // This color should be a grey close to a black or maybe, instead of changing color, this var could be replaced with a boolean (and and equivalent should be created in the shader)
 
 public:
 	// Sets default values for this actor's properties
@@ -44,7 +49,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 private:
-	// Used to not repeat unnecessary operation every Tick update
+	/** Enum used to not repeat unnecessary operation every Tick update */
 	enum distanceType
 	{
 		touching,
