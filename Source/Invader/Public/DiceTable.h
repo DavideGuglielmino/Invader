@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Interactable.h"
+#include "Math/Vector2D.h"
 #include "DiceTable.generated.h"
 
 /// This class can be assigned to every Dice Table object in the level
@@ -21,6 +22,8 @@ public:
 	UMaterialInstanceDynamic* _materialPtr; /** The new material (generated at runtime during BeginPlay) to use to control the shader variables*/
 
 private:
+	/** The X and Y coordinates of where it stands, we save it since it's a static object (we don't create this variable in Interactable.h in case there will be moving interactable objects */
+	FVector2D _xyLocation;
 	/** The distances (in meters) assigned through Blueprint Editor that decide if a player is enough closer to this object */
 	UPROPERTY(EditDefaultsOnly)
 	float _distanceInteraction_touching;

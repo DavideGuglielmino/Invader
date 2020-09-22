@@ -4,8 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "InvaderCharacter.h"
 #include "Interactable.generated.h"
+
+class AInvaderCharacter;
 
 /// This class serve the purpose of giving to an object the InteractBehaviour and OnTouchingBehaviour functions
 /// Since there are no other information given to the gameplay, this abstract class is used as a parent for any interactable object
@@ -18,19 +19,12 @@ class INVADER_API AInteractable : public AActor
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Transient)
 	AInvaderCharacter* _playerPtr; // Assuming it's a single player game, we save the player ptr instead of asking to some manager for it every Tick update ( Can be changed )
-	
-public:	
-	// Sets default values for this actor's properties
-	AInteractable();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
+public:
 	// Called via Blueprint so that every interactable object can have their personal type of response to the player
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Interactable")
 	void InteractBehaviour();

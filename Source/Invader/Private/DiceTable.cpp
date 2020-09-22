@@ -1,12 +1,12 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "DiceTable.h"
-#include "GenericPlatform/GenericPlatformMath.h"
-#include "Containers/Array.h"
 #include "InvaderCharacter.h"
+#include "GenericPlatform/GenericPlatformMath.h"
 
 // Sets default values
 ADiceTable::ADiceTable()
+	: _xyLocation(this->GetActorLocation().X, this->GetActorLocation().Y)
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -28,8 +28,8 @@ void ADiceTable::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	// Calculates the distance between this Actor and the player
-	float distance = FGenericPlatformMath::Sqrt(FGenericPlatformMath::Pow(_playerPtr->GetActorLocation().X - this->GetActorLocation().X, 2) + FGenericPlatformMath::Pow(_playerPtr->GetActorLocation().Y - this->GetActorLocation().Y, 2));
+	// Calculates the distance between this Actor and the player, can be improved in later development by not using the square root function
+	float distance = FGenericPlatformMath::Sqrt(FGenericPlatformMath::Pow(_playerPtr->GetActorLocation().X - _xyLocation.X, 2) + FGenericPlatformMath::Pow(_playerPtr->GetActorLocation().Y - _xyLocation.Y, 2));
 
 	if (distance < _distanceInteraction_touching) // If the player is in range to interact with the object
 	{
